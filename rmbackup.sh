@@ -1,9 +1,9 @@
 #!/bin/bash
 USER=$1 # (Логин от хоста)
-PASSWD@=$2 #(пасс от хоста)
-HOST=$3 #(Адрес хоста)
-i=$4 #(или ваше число дней) 
-b=$5 #(путь к файлам как на том сервере) 
+PASSWD@=$2 #(Пароль от хоста)
+HOST=$3 #(IP Адрес хоста)
+i=$4 #(Удалить файлы старше чем n дней) 
+b=$5 #(путь к файлам хоста) 
 if cat /etc/issue | grep -o Debian; then 
 sudo apt install curlftpfs | tee ./rmlog
 else
