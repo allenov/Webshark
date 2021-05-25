@@ -10,6 +10,6 @@ else
 yum install curlftpfs | tee ./rmlog
 fi
 mkdir -v temp-ftpfs | tee -a ./rmlog
-curlftpfs ftp://$USER:$PASSWD@$HOST/ temp-ftpfs/ | tee -a ./rmlog
+curlftpfs ftp://$USER:$PASSWD@$HOST/ temp-ftpfs/ | tee -a ./rmlog # (мантируем шару по Ftp-не безопасно)
 cd temp-ftpfs 
-find ~/temp-ftpfs/$b -type f -mtime +$i -exec rm -fv {} \; | tee -a ./rmlog
+find ~/temp-ftpfs/$b -type f -mtime +$i -exec rm -fv {} \; | tee -a ./rmlog # (Удаление файла старше n дней)
