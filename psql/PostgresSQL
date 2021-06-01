@@ -34,6 +34,7 @@ ALTER PUBLICATION testdb01 ADD TABLE products, products3, products5, products7, 
 CREATE PUBLICATION testdb03;
 ALTER PUBLICATION testdb03 ADD TABLE products2, products4, products6, products8, products10;
 
+psql -p 5434 
 
 CREATE SUBSCRIPTION testdb01 CONNECTION 'host=127.0.0.1 port=5433 user=postgres dbname=testdb01' PUBLICATION testdb01;
 CREATE SUBSCRIPTION testdb03 CONNECTION 'host=127.0.0.1 port=5433 user=postgres dbname=testdb03' PUBLICATION testdb03;
