@@ -1,0 +1,39 @@
+#Логическая репликация PostgreSQL
+
+sudo chown -R postgres:postgres /usr/local/pgsql/
+sudo su - postgres 
+
+/usr/lib/postgresql/12/bin/initdb -D /usr/local/pgsql/datatest
+/usr/lib/postgresql/12/bin/initdb -D /usr/local/pgsql/datatest2
+
+vi /usr/local/pgsql/datatest/postgresql.conf 
+vi /usr/local/pgsql/datatest2/postgresql.conf 
+
+port = 5433
+wal_level = logical
+port = 5434
+wal_level = logical
+
+/usr/lib/postgresql/12/bin/pg_ctl -D /usr/local/pgsql/datatest -l  /usr/local/pgsql/datatestlog start
+/usr/lib/postgresql/12/bin/pg_ctl -D /usr/local/pgsql/datatest2 -l  /usr/local/pgsql/datatestlog2 start
+
+CREATE DATABASE testdb01;
+
+psql -p 5433 testdb01
+
+CREATE TABLE Products10
+(
+    Id SERIAL PRIMARY KEY,
+    ProductName VARCHAR(30) NOT NULL,
+    Manufacturer VARCHAR(20) NOT NULL);
+
+
+CREATE PUBLICATION testdb01;
+ALTER PUBLICATION testdb01 ADD TABLE products, products3, products5, products7, products9;
+CREATE PUBLICATION testdb03;
+ALTER PUBLICATION testdb03 ADD TABLE products2, products4, products6, products8, products10;
+
+psql -p 5434 
+
+CREATE SUBSCRIPTION testdb01 CONNECTION 'host=127.0.0.1 port=5433 user=postgres dbname=testdb01' PUBLICATION testdb01;
+CREATE SUBSCRIPTION testdb03 CONNECTION 'host=127.0.0.1 port=5433 user=postgres dbname=testdb03' PUBLICATION testdb03;
