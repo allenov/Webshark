@@ -1,4 +1,4 @@
-#Логическая репликация PostgreSQL
+#Логическая репликация PostgreSQL на 1 хосте 2 инстанса.
 
 sudo chown -R postgres:postgres /usr/local/pgsql/
 sudo su - postgres 
