@@ -1,0 +1,10 @@
+[Unit]
+#SourcePath=/etc/fstab
+#Documentation=man:fstab(5) man:systemd-fstab-generator(8)
+Before=remote-fs.target
+
+[Mount]
+What=//ip-name/papka
+Where=/var/www/html/chtoto-tam
+Type=cifs
+Options=username=user,domain=domain.local,password=pass,iocharset=utf8,sec=ntlmv2,vers=2.1,dir_mode=0777,file_mode=0777

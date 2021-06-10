@@ -1,0 +1,10 @@
+[Unit]
+#SourcePath=/etc/fstab
+#Documentation=man:fstab(5) man:systemd-fstab-generator(8)
+Before=remote-fs.target
+
+[Automount]
+Where=/var/www/html/chtoto-tam
+
+[Install]
+WantedBy=multi-user.target
